@@ -1,4 +1,6 @@
+'use client'
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 const footerLinks = [
   { name: "TOP", href: "/" },
@@ -10,8 +12,26 @@ const footerLinks = [
 ]
 
 export default function Footer() {
+  const [showTopBtn, setShowTopBtn] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTopBtn(true)
+      } else {
+        setShowTopBtn(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8 mt-16">
+    <footer className="bg-gray-900 text-gray-300 py-8 mt-16 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap justify-center gap-4 mb-4">
           {footerLinks.map((link) => (
@@ -32,6 +52,15 @@ export default function Footer() {
             © 2025 Specialized Consulting for Japan Market Entry Support @b-cause, Inc. All Rights Reserved.
           </p>
         </div>
+
+        {showTopBtn && (
+          <button
+            onClick={scrollToTop}
+            className="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition"
+          >
+            ↑ Top
+          </button>
+        )}
       </div>
     </footer>
   )
