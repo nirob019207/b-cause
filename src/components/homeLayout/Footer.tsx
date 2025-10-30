@@ -31,7 +31,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8 mt-16 relative">
+    <footer className="bg-gray-900 text-gray-300 py-8 mt-16 relative" id='footer'>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap justify-center gap-4 mb-4">
           {footerLinks.map((link) => (
