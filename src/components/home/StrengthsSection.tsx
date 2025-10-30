@@ -7,7 +7,7 @@ export default function StrengthsSection() {
   ];
 
   return (
-    <section className="py-16 px-4 bg-indigo-50">
+    <section className="py-16 px-4 bg-indigo-50" id="strength">
       <h2 className="text-3xl font-bold text-center text-indigo-700 mb-10">
         Our Strengths
       </h2>

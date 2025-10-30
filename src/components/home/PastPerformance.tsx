@@ -7,7 +7,7 @@ export default function PastPerformance() {
   ];
 
   return (
-    <section className="py-16 px-4 bg-gray-50 text-center">
+    <section className="py-16 px-4 bg-gray-50 text-center" id='past-performance'>
       <h2 className="text-3xl font-bold text-indigo-700 mb-6">Past Performance</h2>
       <p className="max-w-3xl mx-auto text-gray-600 mb-10">
         Since 1998, b-cause, Inc. has completed over 2,700 multilingual projects,

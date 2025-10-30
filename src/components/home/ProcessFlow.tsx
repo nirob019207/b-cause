@@ -7,7 +7,7 @@ export default function ProcessFlow() {
   ];
 
   return (
-    <section className="py-16 px-4 text-center bg-white">
+    <section className="py-16 px-4 text-center bg-white" id='process-flow'>
       <h2 className="text-3xl font-bold text-indigo-700 mb-12">Process Flow</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {stages.map((stage, i) => (
