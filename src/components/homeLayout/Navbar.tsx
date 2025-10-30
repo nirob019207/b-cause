@@ -8,11 +8,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "TOP", href: "/" },
-  { name: "Difference with Government", href: "#" },
-  { name: "Partner Companies", href: "#" },
+ 
   { name: "Process & Cost", href: "#process-flow" },
   { name: "Past Cases", href: "#past-performance" },
   { name: "Company Overview", href: "#company-overview" },
+   { name: "Difference with Government", href: "#" },
+  { name: "Partner Companies", href: "#" },
   { name: "Contact ", href: "#footer" },
 ];
 
@@ -32,7 +33,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-[#5191D6] shadow-md">
       <div className="max-w-7xl mx-auto px-4 xl:px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-white tracking-wide">
+        <Link href="/" className="text-2xl font-bold text-white tracking-wide ">
           b-cause, Inc.
         </Link>
 
