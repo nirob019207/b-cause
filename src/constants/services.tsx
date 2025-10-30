@@ -1,45 +1,58 @@
-  export const services = [
-    {
-      title: "1. Market Insight & Strategy",
-      subtitle: "マーケットインサイト & 進出戦略設計",
-      points: [
-        "Japan Market Research (Industry, Competitors, Regulations)",
-        "Customer and Channel Analysis",
-        "Strategic Roadmap Development",
-        "Partner & Sales Channel Listing",
-        "Cost Estimation and Risk Analysis",
-      ],
-    },
-    {
-      title: "2. Establishment & Setup",
-      subtitle: "進出準備 & 設立支援",
-      points: [
-        "Company Formation and Registration",
-        "Visa and Residence Support",
-        "Office Location Search",
-        "Contract & Legal Documentation",
-        "Manual and Policy Adaptation",
-      ],
-    },
-    {
-      title: "3. Organization & HR",
-      subtitle: "組織構築 & 人材確保",
-      points: [
-        "Recruitment of Japanese Staff",
-        "Development of Labor Policies",
-        "Organizational Design",
-        "Internal Communication Systems",
-      ],
-    },
-    {
-      title: "4. Market Entry & Growth",
-      subtitle: "事業展開 & 成長支援",
-      points: [
-        "Marketing & PR (SNS/Web/Events)",
-        "Sales and Market Development",
-        "Partner Matching",
-        "Trade Show Support",
-        "Multilingual Customer Service",
-      ],
-    },
-  ];
+export const services = [
+  {
+    id: 1,
+    title: "Market Research & Analysis",
+    subtitle: "Deep market insights for Japan",
+    icon: "search",
+    points: [
+      "Comprehensive market analysis",
+      "Competitor benchmarking",
+      "Consumer behavior insights",
+      "Regulatory landscape review",
+    ],
+    gradient: "from-blue-50 to-cyan-50",
+    accentColor: "from-blue-400 to-cyan-400",
+  },
+  {
+    id: 2,
+    title: "Company Setup & Registration",
+    subtitle: "Streamlined business establishment",
+    icon: "building",
+    points: [
+      "Legal entity formation",
+      "Tax registration assistance",
+      "Banking setup support",
+      "Compliance documentation",
+    ],
+    gradient: "from-cyan-50 to-teal-50",
+    accentColor: "from-cyan-400 to-teal-400",
+  },
+  {
+    id: 3,
+    title: "HR & Recruitment Services",
+    subtitle: "Build your local team",
+    icon: "users",
+    points: [
+      "Talent acquisition support",
+      "HR policy development",
+      "Payroll administration",
+      "Employee relations management",
+    ],
+    gradient: "from-teal-50 to-blue-50",
+    accentColor: "from-teal-400 to-blue-400",
+  },
+  {
+    id: 4,
+    title: "Marketing & Localization",
+    subtitle: "Connect with Japanese market",
+    icon: "megaphone",
+    points: [
+      "Brand localization strategy",
+      "Digital marketing campaigns",
+      "Content localization",
+      "Market positioning",
+    ],
+    gradient: "from-blue-50 to-indigo-50",
+    accentColor: "from-blue-400 to-indigo-400",
+  },
+]

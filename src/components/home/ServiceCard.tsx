@@ -1,43 +1,151 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
-import {
-  CheckCircle,
-  Code,
-  Settings,
-  Star,
-  Layout,
-} from "lucide-react";
+"use client"
+import { motion } from "framer-motion"
+import { Search, Building2, Users, Megaphone, CheckCircle2, ArrowRight } from "lucide-react"
 
-export default function ServiceCard({ title, subtitle, points }: any) {
-  // Choose an icon dynamically based on the title
+interface ServiceCardProps {
+  id: number
+  title: string
+  subtitle: string
+  icon: string
+  points: string[]
+  gradient: string
+  accentColor: string
+  index: number
+}
+
+export default function ServiceCard({
+  id,
+  title,
+  subtitle,
+  icon,
+  points,
+  gradient,
+  accentColor,
+  index,
+}: ServiceCardProps) {
   const getIcon = () => {
-    if (title.toLowerCase().includes("design")) return <Layout size={24} />;
-    if (title.toLowerCase().includes("development")) return <Code size={24} />;
-    if (title.toLowerCase().includes("service")) return <Settings size={24} />;
-    return <Star size={24} />;
-  };
+    const iconProps = { size: 28, strokeWidth: 1.5 }
+    switch (icon) {
+      case "search":
+        return <Search {...iconProps} />
+      case "building":
+        return <Building2 {...iconProps} />
+      case "users":
+        return <Users {...iconProps} />
+      case "megaphone":
+        return <Megaphone {...iconProps} />
+      default:
+        return <Search {...iconProps} />
+    }
+  }
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: index * 0.1,
+      },
+    },
+  }
+
+  const hoverVariants = {
+    hover: {
+      y: -8,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+  }
+
+  const iconVariants = {
+    initial: { scale: 1, rotate: 0 },
+    hover: {
+      scale: 1.15,
+      rotate: 5,
+      transition: { duration: 0.3 },
+    },
+  }
+
+  const borderVariants = {
+    initial: { scaleX: 0 },
+    hover: {
+      scaleX: 1,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+  }
 
   return (
-    <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col h-full border-t-4 border-indigo-600">
-      {/* Icon */}
-      <div className="flex items-center justify-center w-12 h-12 bg-indigo-100 text-indigo-700 rounded-full mb-4">
-        {getIcon()}
-      </div>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      whileHover="hover"
+      viewport={{ once: true, amount: 0.2 }}
+      className="h-full"
+    >
+      <motion.div
+        variants={hoverVariants}
+        className={`relative h-full rounded-2xl bg-gradient-to-br ${gradient} p-8 border border-white/40 backdrop-blur-sm overflow-hidden group shadow-lg hover:shadow-2xl transition-shadow duration-300`}
+      >
+        <motion.div
+          className={`absolute inset-0 bg-gradient-to-br ${accentColor} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+          layoutId={`gradient-${id}`}
+        />
 
-      {/* Title & Subtitle */}
-      <h3 className="text-xl font-semibold text-indigo-700 mb-2">{title}</h3>
-      <p className="text-gray-500 mb-4">{subtitle}</p>
+        <motion.div
+          variants={borderVariants}
+          initial="initial"
+          whileHover="hover"
+          className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${accentColor} origin-left`}
+        />
 
-      {/* Points List */}
-      <ul className="list-none space-y-2 text-gray-700 flex-1">
-        {points.map((point: any, index: any) => (
-          <li key={index} className="flex items-start gap-2">
-            <CheckCircle className="text-green-500 mt-1 flex-shrink-0" size={18} />
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+        <div className="relative z-10 flex flex-col h-full">
+          {/* Icon Container */}
+          <motion.div
+            variants={iconVariants}
+            initial="initial"
+            whileHover="hover"
+            className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${accentColor} text-white mb-6 shadow-md`}
+          >
+            {getIcon()}
+          </motion.div>
+
+          {/* Title & Subtitle */}
+          <h3 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">{title}</h3>
+          <p className="text-sm font-medium text-gray-600 mb-6">{subtitle}</p>
+
+          {/* Points List */}
+          <ul className="space-y-3 flex-1 mb-6">
+            {points.map((point, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 + idx * 0.05 }}
+                viewport={{ once: true }}
+                className="flex items-start gap-3"
+              >
+                <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-700 text-sm leading-relaxed">{point}</span>
+              </motion.li>
+            ))}
+          </ul>
+
+          {/* CTA Button */}
+          <motion.button
+            whileHover={{ x: 4 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors group/btn"
+          >
+            Learn more
+            <motion.span initial={{ x: 0 }} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
+              <ArrowRight size={16} />
+            </motion.span>
+          </motion.button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
 }

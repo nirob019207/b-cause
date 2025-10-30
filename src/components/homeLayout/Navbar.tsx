@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "TOP", href: "/" },
@@ -12,13 +13,13 @@ const navLinks = [
   { name: "Process & Cost", href: "#process-flow" },
   { name: "Past Cases", href: "#past-performance" },
   { name: "Company Overview", href: "#company-overview" },
-  { name: "Contact / Estimate / Free Consultation", href: "#footer" },
+  { name: "Contact ", href: "#footer" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const handleScroll = (e:any, href:any) => {
+  const handleScroll = (e: any, href: any) => {
     e.preventDefault();
     setOpen(false);
 
@@ -29,45 +30,81 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-xl">
+    <header className="sticky top-0 z-50 bg-[#5191D6] shadow-md">
       <div className="max-w-7xl mx-auto px-4 xl:px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-blue-700">
+        <Link href="/" className="text-2xl font-bold text-white tracking-wide">
           b-cause, Inc.
         </Link>
 
-        <button className="xl:hidden" onClick={() => setOpen(!open)}>
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {/* Mobile Menu Button */}
+        <button
+          className="xl:hidden text-white"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
 
-        <nav
-          className={`${
-            open ? "block" : "hidden"
-          } xl:flex absolute xl:static top-16 left-0 w-full xl:w-auto bg-white xl:bg-transparent shadow-xl xl:shadow-none`}
-        >
-          <ul className="flex flex-col xl:flex-row xl:items-center text-gray-700">
-            {navLinks.map((link) => (
-              <li key={link.name} className="border-b xl:border-none">
-                {link.href.startsWith("#") ? (
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleScroll(e, link.href)}
-                    className="block px-2 py-3 hover:text-blue-700 transition text-sm cursor-pointer"
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className="block px-2 py-3 hover:text-blue-700 transition text-sm"
-                    onClick={() => setOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
+        {/* Desktop Menu */}
+        <nav className="hidden xl:flex space-x-6">
+          {navLinks.map((link) =>
+            link.href.startsWith("#") ? (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleScroll(e, link.href)}
+                className="text-white hover:text-gray-200 transition text-sm font-medium"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="text-white hover:text-gray-200 transition text-sm font-medium"
+              >
+                {link.name}
+              </Link>
+            )
+          )}
         </nav>
+
+        {/* Mobile Menu Animation */}
+        <AnimatePresence>
+          {open && (
+            <motion.nav
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-16 left-0 w-full bg-[#5191D6] text-white xl:hidden"
+            >
+              <ul className="flex flex-col text-center divide-y divide-blue-300">
+                {navLinks.map((link) => (
+                  <li key={link.name}>
+                    {link.href.startsWith("#") ? (
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleScroll(e, link.href)}
+                        className="block py-4 hover:bg-blue-500 transition"
+                      >
+                        {link.name}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className="block py-4 hover:bg-blue-500 transition"
+                      >
+                        {link.name}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
